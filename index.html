@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+
+<head>	
+	<meta charset="utf-8">    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="inc/theme/login/recursos/css/normalize.css">
+    <link rel="shortcut icon" href="favicon.ico">
+	<title>Login variable</title>
+
+	<style type="text/css">
+
+		body {
+			position: fixed;			
+			background: #ecf0f1 url(inc/theme/login/recursos/img/minimalista_01.jpg) no-repeat;
+			background-position: center;
+			background-size: auto;
+			
+		}
+		#output {			
+			position:absolute; 
+			background:#eee; 
+			width: 800px;			
+			height: 460px;		
+				
+		}		
+/*		@media (min-width: 768px) {
+			body {
+				position: fixed;			
+				background: #ecf0f1 url(inc/theme/login/recursos/img/minimalista_01.jpg) no-repeat;
+				background-position: center;
+				background-size: auto;
+				
+			}
+		}
+		#output {			
+			position:absolute; 
+			background:#fff; 
+			height: 460px;		
+				
+		}	*/	
+	</style>	
+</head>
+
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Login</title>
+</head>
+<body>
+
+	<div id="output"></div>
+
+
+<script type="text/javascript">
+	
+
+
+(function() {
+    var throttle = function(type, name, obj) {
+        obj = obj || window;
+        var running = false;
+        var func = function() {
+            if (running) { return; }
+            running = true;
+             requestAnimationFrame(function() {
+                obj.dispatchEvent(new CustomEvent(name));
+                running = false;
+            });
+        };
+        obj.addEventListener(type, func);
+    };
+
+    /* init - you can init any event */
+    throttle("resize", "optimizedResize");
+})();
+
+
+var getSize = function () {
+	var body = document.body,
+    	html = document.documentElement;
+
+	var width  = Math.max( body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth );
+	var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+
+	var size = {
+		h : height,
+		w : width
+	}
+	// b = x == 'w' ?  width : (x == 'h' ? height : false ); 
+	return size;
+}
+
+	var size = getSize();
+	var l = (size.w - 800)/2;
+	var t  = (size.h - 460)/2;
+
+	var caja = document.getElementById("output");	
+	caja.setAttribute("style", "left:"+ l +"px; top:"+ t +"px;" );
+
+	caja.innerHTML = size.w + " x " + size.h ;
+
+
+// handle event
+window.addEventListener("optimizedResize", function() {
+
+	var size = getSize();
+	var l = (size.w - 800)/2;
+	var t = (size.h - 460)/2;
+
+	var caja = document.getElementById("output");	
+	caja.setAttribute("style", "left:"+ l +"px; top:"+ t +"px;" );
+    
+	caja.innerHTML = size.w + " x " + size.h ;
+
+
+});
+
+</script>
+</body>
+</html>
